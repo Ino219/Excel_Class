@@ -9,7 +9,6 @@ using namespace Microsoft::Office::Interop::Excel;
 using namespace Microsoft::Office::Interop::PowerPoint;
 
 
-
 [STAThreadAttribute]
 
 int main() {
@@ -19,6 +18,8 @@ int main() {
 
 System::Void ExcelClass::MyForm::MyForm_Load(System::Object ^ sender, System::EventArgs ^ e)
 {
+	
+
 	int slide_firstIndex = 1;
 	String^ savePath = ".\\savePPT.pptx";
 	int slideHeight = 0;

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ExcelClass {
+namespace ProgressBarSample {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -8,15 +8,6 @@ namespace ExcelClass {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
-	using namespace Microsoft::Office;
-	using namespace Microsoft::Office::Core;
-
-	using namespace Microsoft::Office::Interop;
-	using namespace Microsoft::Office::Interop::Excel;
-	using namespace Microsoft::Office::Interop::PowerPoint;
-
-
 
 	/// <summary>
 	/// MyForm ‚ÌŠT—v
@@ -43,6 +34,9 @@ namespace ExcelClass {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::ProgressBar^  progressBar1;
+	private: System::Windows::Forms::Button^  button1;
+	protected:
 
 	private:
 		/// <summary>
@@ -57,31 +51,42 @@ namespace ExcelClass {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// progressBar1
+			// 
+			this->progressBar1->Location = System::Drawing::Point(13, 226);
+			this->progressBar1->Name = L"progressBar1";
+			this->progressBar1->Size = System::Drawing::Size(100, 23);
+			this->progressBar1->TabIndex = 0;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(13, 123);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(75, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 12);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(284, 261);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->progressBar1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
+			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load_);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private:
-		int startY_value = 50;
-		int height;
-		int width;
-		const int rowCount = 30;
-		int dataIndex = 1;
-		int totalRowCount = 1;
-		bool whileLoopEnd = false;
-	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e);
-	private: System::Void createTable(int index, PowerPoint::Slide^ s1,int height,int tableNum);
-
-
+	private: System::Void MyForm_Load_(System::Object^  sender, System::EventArgs^  e);
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e);
 	};
 }
