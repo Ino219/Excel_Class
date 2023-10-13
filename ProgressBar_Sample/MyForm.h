@@ -29,6 +29,9 @@ namespace ProgressBarSample {
 		/// </summary>
 		~MyForm()
 		{
+			System::IO::StreamWriter^ sw = gcnew System::IO::StreamWriter(".\\logText.txt");
+			sw->Write(logStr);
+			sw->Close();
 			if (components)
 			{
 				delete components;
@@ -86,6 +89,7 @@ namespace ProgressBarSample {
 
 		}
 #pragma endregion
+	private: String^logStr;
 	private: System::Void MyForm_Load_(System::Object^  sender, System::EventArgs^  e);
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e);
 	};
