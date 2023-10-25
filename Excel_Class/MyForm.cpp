@@ -22,100 +22,174 @@ System::Void ExcelClass::MyForm::MyForm_Load(System::Object ^ sender, System::Ev
 {
 	
 
-	int slide_firstIndex = 1;
-	String^ savePath = ".\\savePPT.pptx";
-	int slideHeight = 0;
+	//int slide_firstIndex = 1;
+	//String^ savePath = ".\\savePPT.pptx";
+	//int slideHeight = 0;
 
-	PowerPoint::Application^ apt = gcnew PowerPoint::ApplicationClass();
-	PowerPoint::Presentations^ presen = apt->Presentations;
+	//PowerPoint::Application^ apt = gcnew PowerPoint::ApplicationClass();
+	//PowerPoint::Presentations^ presen = apt->Presentations;
 
-	PowerPoint::Presentation^ presense1 = presen->Open(savePath, MsoTriState::msoFalse, MsoTriState::msoFalse, MsoTriState::msoTrue);
-	PowerPoint::Slide^ slide1 = presense1->Slides[1];
-	////プレゼンテーション新規作成
-	//PowerPoint::Presentation^ presense1 = presen->Add(MsoTriState::msoFalse);
-	////スライド追加
-	//PowerPoint::Slide^ slide1 = presense1->Slides->Add(slide_firstIndex, PowerPoint::PpSlideLayout::ppLayoutBlank);
-	width = (int)presense1->PageSetup->SlideWidth;
-	height = (int)presense1->PageSetup->SlideHeight;
-	int ct = 1;
-	
+	//PowerPoint::Presentation^ presense1 = presen->Open(savePath, MsoTriState::msoFalse, MsoTriState::msoFalse, MsoTriState::msoTrue);
+	//PowerPoint::Slide^ slide1 = presense1->Slides[1];
+	//////プレゼンテーション新規作成
+	////PowerPoint::Presentation^ presense1 = presen->Add(MsoTriState::msoFalse);
+	//////スライド追加
+	////PowerPoint::Slide^ slide1 = presense1->Slides->Add(slide_firstIndex, PowerPoint::PpSlideLayout::ppLayoutBlank);
+	//width = (int)presense1->PageSetup->SlideWidth;
+	//height = (int)presense1->PageSetup->SlideHeight;
+	//int ct = 1;
+	//
 
-	for each (Microsoft::Office::Interop::PowerPoint::Shape^ var in slide1->Shapes)
-	{
-		if (var->HasTable == MsoTriState::msoTrue) {
-			MessageBox::Show("table");
-		}
-		if (var->Type == MsoShapeType::msoEmbeddedOLEObject) {
-			MessageBox::Show("umekomi");
-			//埋め込みエクセルの起動
-			var->OLEFormat->DoVerb(1);
-			//var->OLEFormat->DoVerb(2);
-			//var->OLEFormat->Application;
-			var->OLEFormat->Activate();
-			Microsoft::Office::Interop::Excel::Workbook^ wb=(Microsoft::Office::Interop::Excel::Workbook^)var->OLEFormat->Object;
-			Microsoft::Office::Interop::Excel::Worksheet^ worksheet = (Microsoft::Office::Interop::Excel::Worksheet^)wb->Worksheets[1];
+	//for each (Microsoft::Office::Interop::PowerPoint::Shape^ var in slide1->Shapes)
+	//{
+	//	if (var->HasTable == MsoTriState::msoTrue) {
+	//		MessageBox::Show("table");
+	//	}
+	//	if (var->Type == MsoShapeType::msoEmbeddedOLEObject) {
+	//		MessageBox::Show("umekomi");
+	//		//埋め込みエクセルの起動
+	//		var->OLEFormat->DoVerb(1);
+	//		//var->OLEFormat->DoVerb(2);
+	//		//var->OLEFormat->Application;
+	//		var->OLEFormat->Activate();
+	//		Microsoft::Office::Interop::Excel::Workbook^ wb=(Microsoft::Office::Interop::Excel::Workbook^)var->OLEFormat->Object;
+	//		Microsoft::Office::Interop::Excel::Worksheet^ worksheet = (Microsoft::Office::Interop::Excel::Worksheet^)wb->Worksheets[1];
 
-			Microsoft::Office::Interop::Excel::Range^ testRange=(Microsoft::Office::Interop::Excel::Range^)worksheet->Cells[1,1];
-			testRange->Value2 = "1";
-			//MessageBox::Show(var->OLEFormat->Object->GetType()->ToString());
-			//MessageBox::Show("table:" + var->HasTable.ToString());
-			//MessageBox::Show("text:" + var->HasTextFrame.ToString());
+	//		Microsoft::Office::Interop::Excel::Range^ testRange=(Microsoft::Office::Interop::Excel::Range^)worksheet->Cells[1,1];
+	//		testRange->Value2 = "1";
+	//		//MessageBox::Show(var->OLEFormat->Object->GetType()->ToString());
+	//		//MessageBox::Show("table:" + var->HasTable.ToString());
+	//		//MessageBox::Show("text:" + var->HasTextFrame.ToString());
 
 
-		}
-	}
+	//	}
+	//}
 
-	
+	//
 
-	/*while (dataIndex < rowCount) {
-		if (whileLoopEnd) {
-			break;
-		}
-		createTable(dataIndex, slide1, height,ct);
-		ct++;
-	}*/
+	///*while (dataIndex < rowCount) {
+	//	if (whileLoopEnd) {
+	//		break;
+	//	}
+	//	createTable(dataIndex, slide1, height,ct);
+	//	ct++;
+	//}*/
 
-	//セーブ
-	presense1->SaveAs(savePath, Microsoft::Office::Interop::PowerPoint::PpSaveAsFileType::ppSaveAsDefault, MsoTriState::msoTrue);
-	
-	//閉じる
-	presense1->Close();
-	System::Runtime::InteropServices::Marshal::ReleaseComObject(presense1);
-	System::Runtime::InteropServices::Marshal::ReleaseComObject(presen);
+	////セーブ
+	//presense1->SaveAs(savePath, Microsoft::Office::Interop::PowerPoint::PpSaveAsFileType::ppSaveAsDefault, MsoTriState::msoTrue);
+	//
+	////閉じる
+	//presense1->Close();
+	//System::Runtime::InteropServices::Marshal::ReleaseComObject(presense1);
+	//System::Runtime::InteropServices::Marshal::ReleaseComObject(presen);
 
-	apt->Quit();
-	System::Runtime::InteropServices::Marshal::ReleaseComObject(apt);
+	//apt->Quit();
+	//System::Runtime::InteropServices::Marshal::ReleaseComObject(apt);
 
 	//excelの初期化
-	//Microsoft::Office::Interop::Excel::Application^ app_ = nullptr;
-	//Microsoft::Office::Interop::Excel::Workbook^ workbook = nullptr;
-	//Microsoft::Office::Interop::Excel::Worksheet^ worksheet = nullptr;
-	//Microsoft::Office::Interop::Excel::Range^ testRange = nullptr;
-	//Microsoft::Office::Interop::Excel::ListObject^ lo = nullptr;
+	Microsoft::Office::Interop::Excel::Application^ app_ = nullptr;
+	Microsoft::Office::Interop::Excel::Workbooks^ wbs = nullptr;
+	Microsoft::Office::Interop::Excel::Workbook^ workbook = nullptr;
+	Microsoft::Office::Interop::Excel::Worksheets^ worksheets = nullptr;
+	Microsoft::Office::Interop::Excel::Worksheet^ worksheet = nullptr;
+	Microsoft::Office::Interop::Excel::Range^ testRange = nullptr;
+	Microsoft::Office::Interop::Excel::ListObject^ lo = nullptr;
 
 	////開くファイルの指定
-	//String^ filePath = ".//sampleExcel__.xlsx";
+	String^ filePath = ".//sampleExcel__.xlsx";
 
-	//app_ = gcnew Microsoft::Office::Interop::Excel::ApplicationClass();
+	String^ saveFilePath = "C:\\Users\\chach\\Documents\\sampleExcel__123.xlsx";
+
+	app_ = gcnew Microsoft::Office::Interop::Excel::ApplicationClass();
 	////Excelブックの表示はしない
-	//app_->Visible = false;
+	app_->Visible = false;
+	app_->DisplayAlerts = false;
+
+	wbs = app_->Workbooks;
+	//新規追加
+	workbook=wbs->Add(Type::Missing);
+	//保存
+	workbook->SaveAs(saveFilePath, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Excel::XlSaveAsAccessMode::xlNoChange, Excel::XlSaveConflictResolution::xlOtherSessionChanges, Type::Missing, Type::Missing, Type::Missing, Type::Missing);
+	
+	if (lo != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(lo);
+		lo = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (testRange != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(testRange);
+		testRange = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	workbook->Close(Type::Missing, Type::Missing, Type::Missing);
+	if (workbook != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(workbook);
+		workbook = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (wbs != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(wbs);
+		wbs = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+
+	if (app_ != nullptr)
+	{
+		app_->Quit();
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(app_);
+		app_ = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+
+	app_ = gcnew Microsoft::Office::Interop::Excel::ApplicationClass();
+	////Excelブックの表示はしない
+	app_->Visible = false;
+	app_->DisplayAlerts = false;
+
 	////ファイルパスからブックを開く
-	//workbook = (Microsoft::Office::Interop::Excel::Workbook^)(app_->Workbooks->Open(
-	//	filePath,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing,
-	//	Type::Missing));
+	workbook = (Microsoft::Office::Interop::Excel::Workbook^)(app_->Workbooks->Open(
+		saveFilePath,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing,
+		Type::Missing));
+
+	//worksheets = (Microsoft::Office::Interop::Excel::Worksheets^)workbook->Sheets;
+	worksheet = (Microsoft::Office::Interop::Excel::Worksheet^)workbook->Sheets->Add(Type::Missing,Type::Missing,1,Type::Missing);
+
+	//保存
+	workbook->SaveAs(saveFilePath, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Excel::XlSaveAsAccessMode::xlNoChange, Type::Missing, Type::Missing, Type::Missing, Type::Missing, Type::Missing);
+
+
+	////保存
+	//workbook->SaveCopyAs(saveFilePath);
+
+	//workbook->Close(Type::Missing, Type::Missing, Type::Missing);
+
 	////一枚目のワークシートを開く
 	//worksheet = (Microsoft::Office::Interop::Excel::Worksheet^)workbook->Worksheets[1];
 
@@ -197,40 +271,66 @@ System::Void ExcelClass::MyForm::MyForm_Load(System::Object ^ sender, System::Ev
 	//workbook->Save();
 
 	////Excelのプロセスを閉じる処理
-	//if (lo != nullptr)
-	//{
-	//	System::Runtime::InteropServices::Marshal::ReleaseComObject(lo);
-	//	lo = nullptr;
-	//}
-	//GC::Collect();
-	//GC::WaitForPendingFinalizers();
-	//GC::Collect();
-	//if (testRange != nullptr)
-	//{
-	//	System::Runtime::InteropServices::Marshal::ReleaseComObject(testRange);
-	//	testRange = nullptr;
-	//}
-	//GC::Collect();
-	//GC::WaitForPendingFinalizers();
-	//GC::Collect();
-	////workbook->Close(Type::Missing, Type::Missing, Type::Missing);
-	//if (workbook != nullptr)
-	//{
-	//	System::Runtime::InteropServices::Marshal::ReleaseComObject(workbook);
-	//	workbook = nullptr;
-	//}
-	//GC::Collect();
-	//GC::WaitForPendingFinalizers();
-	//GC::Collect();
-	//if (app_ != nullptr)
-	//{
-	//	app_->Quit();
-	//	System::Runtime::InteropServices::Marshal::ReleaseComObject(app_);
-	//	app_ = nullptr;
-	//}
-	//GC::Collect();
-	//GC::WaitForPendingFinalizers();
-	//GC::Collect();
+	if (lo != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(lo);
+		lo = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (testRange != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(testRange);
+		testRange = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (worksheet != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(worksheet);
+		worksheet = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (worksheets != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(worksheets);
+		worksheets = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+
+	workbook->Close(Type::Missing, Type::Missing, Type::Missing);
+	if (workbook != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(workbook);
+		workbook = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+	if (wbs != nullptr)
+	{
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(wbs);
+		wbs = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
+
+	if (app_ != nullptr)
+	{
+		app_->Quit();
+		System::Runtime::InteropServices::Marshal::ReleaseComObject(app_);
+		app_ = nullptr;
+	}
+	GC::Collect();
+	GC::WaitForPendingFinalizers();
+	GC::Collect();
 
 	//return System::Void();
 }
